@@ -1,1 +1,1 @@
-# vue-graphql-apollo
+# api-graphql-apollo-mongodb
