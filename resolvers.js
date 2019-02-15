@@ -7,7 +7,6 @@ module.exports = {
           path: "createdBy",
           model: "User"
         });
-
       return posts;
     }
   },
@@ -24,7 +23,6 @@ module.exports = {
         description,
         createdBy: creatorId
       }).save();
-
       return newPost;
     },
     signupUser: async (_, { username, email, password }, { User }) => {
@@ -32,13 +30,11 @@ module.exports = {
       if (user) {
         throw new Error("User already exists");
       }
-
       const newUser = await new User({
         username,
         email,
         password
       }).save();
-
       return newUser;
     }
   }
