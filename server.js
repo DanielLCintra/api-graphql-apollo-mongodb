@@ -3,19 +3,23 @@ const mongoose = require("mongoose");
 const fs = require("fs");
 const path = require("path");
 
+// Import typdefs and resolvers
 const filePath = path.join(__dirname, "typeDefs.gql");
 const typeDefs = fs.readFileSync(filePath, "utf-8");
 const resolvers = require("./resolvers");
 
+// Import Environment variables and Mongoose Models
 require("dotenv").config({ path: "variables.env" });
 const User = require("./models/User");
 const Post = require("./models/Post");
 
+// Connect to MongoDB Atlas Database
 mongoose
   .connect(process.env.MONGO_URI, { useNewUrlParser: true })
   .then(() => console.log("DB CONNECTED"))
   .catch(error => console.error(error));
 
+// Create Apollo/GraphQl Server using typeDefs, resolvers and context object
 const server = new ApolloServer({
   typeDefs,
   resolvers,
