@@ -1,3 +1,4 @@
+import "@babel/polyfill";
 import Vue from "vue";
 import "./plugins/vuetify";
 import App from "./App.vue";
@@ -9,11 +10,12 @@ import VueApollo from "vue-apollo";
 
 Vue.use(VueApollo);
 
-const apolloClient = new ApolloClient({
+// Setup ApolloClient
+const defaultClient = new ApolloClient({
   uri: "http://localhost:4000/graphql"
 });
 
-const apolloProvider = new VueApollo({ apolloClient });
+const apolloProvider = new VueApollo({ defaultClient });
 
 Vue.config.productionTip = false;
 
