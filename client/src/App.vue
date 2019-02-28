@@ -109,22 +109,49 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex'
+
 export default {
   name: "App",
 
   data: () => ({
-    horizontalNavItems: [
+    sideNav: false,
+    items: [
       { icon: "chat", title: "Posts", link: "/posts" },
       { icon: "lock_open", title: "Sign in", link: "/signin" },
       { icon: "create", title: "Sign up", link: "/signup" }
-    ],
-    sideNavItems: [
-      { icon: "chat", title: "Posts", link: "/posts" },
-      { icon: "lock_open", title: "Sign in", link: "/signin" },
-      { icon: "create", title: "Sign up", link: "/signup" }
-    ],
-    sideNav: false
+    ]
   }),
+
+  computed: {
+    ...mapGetters(['user']),
+
+    horizontalNavItems() { 
+      let items = this.items
+
+      if (this.user) {
+        items = [
+          { icon: "chat", title: "Posts", link: "/posts" }
+        ]
+      }
+
+      return items
+    },
+
+    sideNavItems() {  
+      let items = this.items
+      
+      if (this.user) {
+        items = [
+          { icon: "chat", title: "Posts", link: "/posts" },
+          { icon: "stars", title: "Create Post", link: "/post/add" },
+          { icon: "account_box", title: "Profile", link: "/profile" }
+        ]
+      }
+
+      return items
+    }
+  },
 
   methods: {
     toggleSideNav() {

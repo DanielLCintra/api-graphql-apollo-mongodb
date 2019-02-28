@@ -9,6 +9,3 @@ export default {
   name: "Signup"
 };
 </script>
-
-<style>
-</style>
